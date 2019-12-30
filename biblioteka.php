@@ -17,10 +17,8 @@
         $result = mysqli_query($conn,$query);
         echo "<ul>";
           while ($row=mysqli_fetch_array($result)) {//дивись уважно сюда просто передаем результат запроса
-            $i=1;
             echo "<li>".$row['imie']." ";
             echo $row['nazwisko']."</li>";
-            $i++;
           }
         echo "</ul>";
       mysqli_close($conn);
@@ -28,17 +26,18 @@
   </div>
   <div id="srodkowy">
     <h3>Dodaj nowego czytelnika</h3>
-    <form>
-      imię:<input type="text"><br>
-      nazwisko:<input type="text"><br>
-      rok urodzenia:<input type="number"><br>
-      <input type="submit" value="DODAJ">
+    <form method="POST">
+      imię:<input type="text" name="imie"><br>
+      nazwisko:<input type="text" name="nazwisko"><br>
+      rok urodzenia:<input type="number" name="year"><br>
+      <input type="submit" name="dodaj" value="DODAJ">
     </form>
-    <?php 
+    <?php
       $conn = mysqli_connect("localhost","root","","biblioteka");
-      $query = "SELECT imie, nazwisko FROM autorzy";
+        echo ($_POST['imie']);//добавить описание
+      $query = "INSERT INTO czytelnicy (id, imie, nazwisko, kod) VALUES (LAST_INSERT_ID(), {$_POST['imie']}, {$_POST['nazwisko']}, 'ANMI05')";
         $result = mysqli_query($conn,$query);
-
+          echo $result;
         mysqli_close($conn);
     ?>
   </div>
