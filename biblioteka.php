@@ -34,10 +34,14 @@
     </form>
     <?php
       $conn = mysqli_connect("localhost","root","","biblioteka");
-        echo ($_POST['imie']);//добавить описание
-      $query = "INSERT INTO czytelnicy (id, imie, nazwisko, kod) VALUES (LAST_INSERT_ID(), {$_POST['imie']}, {$_POST['nazwisko']}, 'ANMI05')";
-        $result = mysqli_query($conn,$query);
-          echo $result;
+      $show = "Czytelnik: {$_POST['imie']} {$_POST['nazwisko']} zostal dodany do bazy danych";
+      echo $show;
+      $kod = strtoupper(substr($_POST['imie'],0,2).substr($_POST['nazwisko'],0,2).substr($_POST['year'],0,2));
+      $query = "INSERT INTO czytelnicy (id, imie, nazwisko, kod) VALUES (LAST_INSERT_ID(), '{$_POST['imie']}', '{$_POST['nazwisko']}', '{$kod}')";
+          $result = mysqli_query($conn,$query);
+      //     print_r($query);
+      //     echo $result;
+          // print_r($query);
         mysqli_close($conn);
     ?>
   </div>

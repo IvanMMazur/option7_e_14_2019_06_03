@@ -2,7 +2,13 @@ SELECT imie, nazwisko FROM autorzy
 __________________________________
 INSERT INTO czytelnicy VALUES (11, 'Anna', 'Michalak', 'ANMI05')
 _________________________________________________________________
-SELECT tytul FROM ksiazki WHERE id_kategoria='1'
+SELECT tytul FROM ksiazki k 
+left outer JOIN kategorie kat 
+ON kat.id = k.id_kategoria WHERE kat.nazwa = 'epika'
 ________________________________________________
 SELECT tytul FROM ksiazki WHERE id IN (SELECT id_ksiazka FROM wypozyczenia WHERE id_czytelnik='3')
 ____________________________________________________________________
+select * from autorzy left outer JOIN
+(
+select count(*) as ile, id_autor from ksiazki 
+group by id_autor)v on v.id_autor = autorzy.id
