@@ -35,7 +35,7 @@
     <?php
       $conn = mysqli_connect("localhost","root","","biblioteka");
       $show = "Czytelnik: {$_POST['imie']} {$_POST['nazwisko']} zostal dodany do bazy danych";
-      echo $show;
+        echo $show;
       $kod = strtoupper(substr($_POST['imie'],0,2).substr($_POST['nazwisko'],0,2).substr($_POST['year'],0,2));
       $query = "INSERT INTO czytelnicy (id, imie, nazwisko, kod) VALUES (LAST_INSERT_ID(), '{$_POST['imie']}', '{$_POST['nazwisko']}', '{$kod}')";
           $result = mysqli_query($conn,$query);
